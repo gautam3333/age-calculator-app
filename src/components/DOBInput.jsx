@@ -1,24 +1,68 @@
-export default function DOBInput() {
+import { useState } from 'react';
+
+export default function DOBInput({
+  day,
+  setDay,
+  month,
+  setMonth,
+  year,
+  setYear,
+}) {
+  const [error, setError] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (day.length === 0 || month.length === 0 || year.length === 0) {
+      setError(true);
+    }
+  }
+
   return (
-    <form className='dobinput_box'>
+    <form className='dobinput_box' onSubmit={handleSubmit}>
       <div className='dobinput_form'>
         <div>
           <p className='date'>Day</p>
-          <input type='text' placeholder='DD' />
-          <p className='error_msg'>This field is required</p>
-          <p className='error_msg'>Must be a valid day</p>
+          <input
+            type='text'
+            placeholder='DD'
+            onChange={(e) => setDay(e.target.value)}
+          />
+          {error && day.length <= 0 && (
+            <p className='error_msg'>This field is required</p>
+          )}
+          {(+day < 0 || +day > 31) && (
+            <p className='error_msg'>Must be a valid day</p>
+          )}
         </div>
         <div>
           <p className='date'>Month</p>
-          <input type='text' placeholder='MM' />
-          <p className='error_msg'>This field is required</p>
-          <p className='error_msg'>Must be a valid month</p>
+          <input
+            type='text'
+            placeholder='MM'
+            onChange={(e) => setMonth(e.target.value)}
+          />
+          {error && month.length <= 0 && (
+            <p className='error_msg'>This field is required</p>
+          )}
+          {(+month < 0 || +month > 12) && (
+            <p className='error_msg'>Must be a valid month</p>
+          )}
         </div>
         <div>
           <p className='date'>Year</p>
-          <input type='text' placeholder='YYYY' />
-          <p className='error_msg'>This field is required</p>
-          <p className='error_msg'>Must be in the past</p>
+          <input
+            type='text'
+            placeholder='YYYY'
+            onChange={(e) => setYear(e.target.value)}
+          />
+          {error && year.length <= 0 && (
+            <p className='error_msg'>This field is required</p>
+          )}
+          {+year > new Date().getFullYear() && (
+            <p className='error_msg'>Must be in the past</p>
+          )}
+          {+year < 0 && <p className='error_msg'>Invalid year</p>}
         </div>
       </div>
 
