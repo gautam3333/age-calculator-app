@@ -6,6 +6,9 @@ export default function App() {
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
+  const [ageYear, setAgeYear] = useState(0);
+  const [ageMonth, setAgeMonth] = useState(0);
+  const [ageDays, setAgeDays] = useState(0);
 
   return (
     <main>
@@ -17,8 +20,11 @@ export default function App() {
           setMonth={setMonth}
           year={year}
           setYear={setYear}
+          setAgeYear={setAgeYear}
+          setAgeMonth={setAgeMonth}
+          setAgeDays={setAgeDays}
         />
-        <AgeDisplay />
+        <AgeDisplay ageYear={ageYear} ageMonth={ageMonth} ageDays={ageDays} />
       </article>
     </main>
   );

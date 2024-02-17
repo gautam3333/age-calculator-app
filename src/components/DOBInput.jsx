@@ -7,8 +7,15 @@ export default function DOBInput({
   setMonth,
   year,
   setYear,
+  setAgeYear,
+  setAgeMonth,
+  setAgeDays,
 }) {
   const [error, setError] = useState(false);
+  const date = new Date();
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth() + 1;
+  let currentDay = date.getDate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +23,23 @@ export default function DOBInput({
     if (day.length === 0 || month.length === 0 || year.length === 0) {
       setError(true);
     }
+
+    // computing the age in years, months and days
+    let tempYear = currentYear - +year;
+    setAgeYear(tempYear);
+
+    if (+month > currentMonth) {
+      tempYear = tempYear - 1;
+      setAgeYear(tempYear);
+    }
+
+    if (+month === currentMonth && +day > currentDay) {
+      tempYear = tempYear - 1;
+      setAgeYear(tempYear);
+    }
+
+    setAgeMonth(Math.abs(+month - currentMonth));
+    setAgeDays(Math.abs(currentDay - +day));
   }
 
   return (

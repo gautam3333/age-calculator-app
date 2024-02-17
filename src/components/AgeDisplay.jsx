@@ -1,14 +1,14 @@
-export default function AgeDisplay() {
+export default function AgeDisplay({ ageYear, ageMonth, ageDays }) {
   return (
     <article className='age_box'>
       <p>
-        <span>38</span>&nbsp;years
+        <span>{ageYear === 0 ? '_ _' : ageYear}</span>&nbsp;years
       </p>
       <p>
-        <span>3</span>&nbsp;months
+        <span>{ageMonth === 0 ? '_ _' : ageMonth}</span>&nbsp;months
       </p>
       <p>
-        <span>26</span>&nbsp;days
+        <span>{ageDays === 0 ? '_ _' : ageDays}</span>&nbsp;days
       </p>
     </article>
   );
