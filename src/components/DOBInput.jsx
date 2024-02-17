@@ -25,21 +25,23 @@ export default function DOBInput({
     }
 
     // computing the age in years, months and days
-    let tempYear = currentYear - +year;
-    setAgeYear(tempYear);
-
-    if (+month > currentMonth) {
-      tempYear = tempYear - 1;
+    if (day.length > 0 && month.length > 0 && year.length > 0) {
+      let tempYear = currentYear - +year;
       setAgeYear(tempYear);
-    }
 
-    if (+month === currentMonth && +day > currentDay) {
-      tempYear = tempYear - 1;
-      setAgeYear(tempYear);
-    }
+      if (+month > currentMonth) {
+        tempYear = tempYear - 1;
+        setAgeYear(tempYear);
+      }
 
-    setAgeMonth(Math.abs(+month - currentMonth));
-    setAgeDays(Math.abs(currentDay - +day));
+      if (+month === currentMonth && +day > currentDay) {
+        tempYear = tempYear - 1;
+        setAgeYear(tempYear);
+      }
+
+      setAgeMonth(Math.abs(+month - currentMonth));
+      setAgeDays(Math.abs(currentDay - +day));
+    }
   }
 
   return (
